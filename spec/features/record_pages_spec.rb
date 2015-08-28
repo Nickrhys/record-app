@@ -41,6 +41,18 @@ feature "records" do
         expect(current_path).to eq(record_path(record))
       end
     end
+
+    describe "edit" do
+      it "changes the record name" do
+        record = Record.create(name: "Marquee Moon")
+        visit record_path(record)
+        click_link "edit"
+        fill_in "Name", with: "Marquee Moon: 30th Anniversary edition"
+        click_button 'Update Record'
+        expect(page).to have_content "Marquee Moon: 30th Anniversary edition"
+        expect(current_path).to eq record_path(record)
+      end
+    end
   end
 
 end
