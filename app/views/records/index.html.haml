@@ -1,7 +1,7 @@
 .container
   - if @records.any?
     - @records.each do |record|
-      %h2= record.name
+      = link_to record.name, record_path(record)
   - else
     %h1
       no records added

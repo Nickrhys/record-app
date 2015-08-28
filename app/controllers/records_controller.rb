@@ -13,6 +13,10 @@ class RecordsController < ApplicationController
     redirect_to records_path
   end
 
+  def show
+    @record = Record.find(params[:id])
+  end
+
 
   protected
 
