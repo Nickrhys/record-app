@@ -1,3 +1,4 @@
 .container
   = @record.name
   = link_to "edit", edit_record_path(@record)
+  = button_to "Delete #{@record.name}", record_path(@record), method: :delete

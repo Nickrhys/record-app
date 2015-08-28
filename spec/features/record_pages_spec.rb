@@ -43,13 +43,24 @@ feature "records" do
     end
 
     describe "show" do
-
       it "links to edit" do
         record = Record.create(name: "Marquee Moon")
         visit record_path(record)
         click_link "edit"
         expect(current_path).to eq(edit_record_path(record))
       end
+
+      context 'deleting' do
+        it 'removes a record when a user clicks a delete link' do
+          record = Record.create(name: "Marquee Moon")
+          visit record_path(record)
+          click_button "Delete Marquee Moon"
+          expect(page).not_to have_content "Marquee Moon"
+          expect(current_path).to eq(records_path)
+          expect(page).to have_content 'Record deleted successfully'
+        end
+      end
+
     end
 
     describe "edit" do
