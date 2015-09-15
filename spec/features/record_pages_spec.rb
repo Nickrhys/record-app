@@ -48,6 +48,21 @@ feature "records" do
         expect(current_path).to eq records_path
       end
     end
+
+    context "with no artists added" do
+      it "links through to add an artist" do 
+        visit new_record_path
+        expect(page).to have_link "add artist"
+      end
+    end
+
+    context "with artists added" do
+      it "shows artist" do
+        artist = Artist.create(name: "Television")
+        visit new_record_path
+        expect(page).to have_content("Television")
+      end
+    end  
   end
 
   describe "show" do
