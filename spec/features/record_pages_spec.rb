@@ -15,9 +15,11 @@ feature "records" do
     context "with records added" do
 
       it "displays the record in index" do
-        Record.create(name: "Marquee Moon")
+        artist = Artist.create(name: "Television")
+        record = Record.create(name: "Marquee Moon", artist_id: artist.id)
         visit records_path
         expect(page).to have_content "Marquee Moon"
+        expect(page).to have_content "Television"
         expect(page).not_to have_content "no records added"
       end
 

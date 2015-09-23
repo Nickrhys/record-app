@@ -1,7 +1,11 @@
 .container
   - if @records.any?
+    %ul
     - @records.each do |record|
-      = link_to record.name, record_path(record)
+      %li
+        = link_to record.name, record_path(record)
+        = "- "
+        = record.artist.name
   - else
     %h1
       no records added
