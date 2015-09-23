@@ -37,6 +37,6 @@ class RecordsController < ApplicationController
   protected
 
   def record_params
-    params.require(:record).permit(:name)
+    params.require(:record).permit(:name, :artist_id)
   end
 end

@@ -25,8 +25,6 @@ feature "records" do
         record = Record.create(name: "Marquee Moon")
         visit records_path
         click_link "Marquee Moon"
-        puts "#{record}"
-        expect(page).to have_content("Marquee Moon")
         expect(current_path).to eq(record_path(record))
       end
     end
@@ -41,11 +39,13 @@ feature "records" do
   describe "new" do
     context "create a record" do
       it "allows users to enter a record" do
-        visit new_record_path
+        artist = Artist.create(name: "Neil Young")
+        expect{visit new_record_path
         fill_in "Name", with: "After The Goldrush"
+        select "Neil Young", from: "record[artist_id]"
         click_button "Create Record"
-        expect(page).to have_content "After The Goldrush"
         expect(current_path).to eq records_path
+        }.to change{Record.count}.by 1
       end
     end
 
