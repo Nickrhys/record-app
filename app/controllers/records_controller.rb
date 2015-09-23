@@ -15,6 +15,7 @@ class RecordsController < ApplicationController
 
   def show
     @record = Record.find(params[:id])
+    @artist = @record.artist
   end
 
   def edit

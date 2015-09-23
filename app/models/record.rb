@@ -1,3 +1,3 @@
 class Record < ActiveRecord::Base
-  belongs_to :artists
+  belongs_to :artist
 end

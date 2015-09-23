@@ -22,7 +22,8 @@ feature "records" do
       end
 
       it "links to show" do
-        record = Record.create(name: "Marquee Moon")
+        artist = Artist.create(name: "Television")
+        record = Record.create(name: "Marquee Moon", artist_id: artist.id)
         visit records_path
         click_link "Marquee Moon"
         expect(current_path).to eq(record_path(record))
@@ -67,15 +68,24 @@ feature "records" do
 
   describe "show" do
     it "links to edit" do
-      record = Record.create(name: "Marquee Moon")
+      artist = Artist.create(name: "Television")
+      record = Record.create(name: "Marquee Moon", artist_id: artist.id)
       visit record_path(record)
       click_link "edit"
       expect(current_path).to eq(edit_record_path(record))
     end
 
+    it "displays artist name" do 
+      artist = Artist.create(name: "Television")
+      record = Record.create(name: "Marquee Moon", artist_id: artist.id)
+      visit record_path(record)
+      expect(page).to have_content(artist.name)
+    end
+
     context 'deleting' do
       it 'removes a record when a user clicks a delete link' do
-        record = Record.create(name: "Marquee Moon")
+        artist = Artist.create(name: "Television")
+        record = Record.create(name: "Marquee Moon", artist_id: artist.id)        
         visit record_path(record)
         click_button "Delete Marquee Moon"
         expect(page).not_to have_content "Marquee Moon"
@@ -87,7 +97,8 @@ feature "records" do
 
   describe "edit" do
     it "changes the record name" do
-      record = Record.create(name: "Marquee Moon")
+      artist = Artist.create(name: "Television")
+      record = Record.create(name: "Marquee Moon", artist_id: artist.id)
       visit edit_record_path(record)
       fill_in "Name", with: "Marquee Moon: 30th Anniversary edition"
       click_button 'Update Record'
