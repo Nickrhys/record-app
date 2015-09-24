@@ -45,6 +45,7 @@ feature "records" do
         artist = Artist.create(name: "Neil Young")
         expect{visit new_record_path
         fill_in "Name", with: "After The Goldrush"
+        fill_in "track[record_id]", with: "Only love can break your heart"
         select "Neil Young", from: "record[artist_id]"
         click_button "Create Record"
         expect(current_path).to eq records_path
