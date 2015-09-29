@@ -10,13 +10,13 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.create(record_params)
-    @record.tracks.build
+    @record.tracks.build(record_id: @record.id)
+    @record.save!
     redirect_to records_path
   end
 
   def show
     @record = Record.find(params[:id])
-    @artist = @record.artist
   end
 
   def edit

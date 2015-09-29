@@ -1,5 +1,7 @@
 .container
   = @record.name
   = @record.artist.name
+  - @record.tracks.each do |track|
+    = track.name
   = link_to "edit", edit_record_path(@record)
   = button_to "Delete #{@record.name}", record_path(@record), method: :delete
