@@ -10,6 +10,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record.create(record_params)
+    @record.tracks.build
     redirect_to records_path
   end
 
