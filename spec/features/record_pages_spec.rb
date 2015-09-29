@@ -81,8 +81,17 @@ feature "records" do
     it "displays artist name" do 
       artist = Artist.create(name: "Television")
       record = Record.create(name: "Marquee Moon", artist_id: artist.id)
+      track = Track.create(name: "See No Evil", record_id: record.id)
       visit record_path(record)
       expect(page).to have_content(artist.name)
+    end
+
+    it "displays track name" do
+      artist = Artist.create(name: "Television")
+      record = Record.create(name: "Marquee Moon", artist_id: artist.id)
+      track = Track.create(name: "See No Evil", record_id: record.id)
+      visit record_path(record)
+      expect(page).to have_content(track.name)
     end
 
     context 'deleting' do
