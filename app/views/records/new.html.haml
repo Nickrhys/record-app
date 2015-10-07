@@ -1,7 +1,7 @@
 = simple_form_for @record do |f|
   = f.collection_select(:artist_id, Artist.all, :id, :name, prompt: true)
-  = f.input :name
-  = f.simple_fields_for :track do |t|
-    = t.input :name
-  = f.button :submit
+  = f.input :name, label: 'Title'
+  = f.simple_fields_for :tracks do |t|
+    = t.input :name, label: 'Track 1'
+    = t.submit 'Add Record'
 = link_to 'add artist', new_artist_path

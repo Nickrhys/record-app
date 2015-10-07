@@ -44,10 +44,10 @@ feature "records" do
       it "allows users to enter a record" do
         artist = Artist.create(name: "Neil Young")
         expect{visit new_record_path
-        fill_in "Name", with: "After The Goldrush"
-        fill_in "record[track][name]", with: "Only love can break your heart"
+        fill_in "Title", with: "After The Goldrush"
+        fill_in "Track 1", with: "Only love can break your heart"
         select "Neil Young", from: "record[artist_id]"
-        click_button "Create Record"
+        click_button "Add Record"
         expect(current_path).to eq records_path
         }.to change{Record.count}.by 1
       end

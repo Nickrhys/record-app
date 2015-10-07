@@ -6,11 +6,11 @@ class RecordsController < ApplicationController
 
   def new
     @record = Record.new
+    @record.tracks.build
   end
 
   def create
     @record = Record.create(record_params)
-    @record.tracks.build(record_id: @record.id)
     @record.save!
     redirect_to records_path
   end
@@ -39,6 +39,6 @@ class RecordsController < ApplicationController
   protected
 
   def record_params
-    params.require(:record).permit(:name, :artist_id)
+    params.require(:record).permit(:name, :artist_id, tracks_attributes: [:name])
   end
 end
