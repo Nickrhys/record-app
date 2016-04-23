@@ -13,4 +13,27 @@ feature 'artists' do
       end
     end
   end
+
+  describe "index" do
+    context "with artists added" do
+      let!(:artist) {FactoryGirl.create(:artist)}
+
+      it "displays the artist in index" do
+        visit artists_path
+        expect(page).to have_content artist.name
+      end
+
+      context "with records" do
+        let!(:record) {FactoryGirl.create(:record)}
+        
+        it "links through to records" do
+          visit artists_path
+          click_link artist.name
+          expect(current_path).to eq "/artists/#{artist.id}/records"
+          expect(page).to have_content record.name
+        end
+      end
+    end  
+  end
+
 end
