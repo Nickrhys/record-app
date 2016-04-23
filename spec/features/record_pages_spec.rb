@@ -61,6 +61,14 @@ feature "records" do
         expect(current_path).to eq records_path
         }.to change{Record.count}.by 1
       end
+
+      it "can have an image uploaded" do
+        visit new_record_path
+        attach_file('record[avatar]', File.join(Rails.root, '/spec/fixtures/avatar.jpeg'))        
+        select artist.name, from: "record[artist_id]"
+        click_button "Add Record"
+        expect(Record.last.avatar).to be_a(AvatarUploader)
+      end
     end  
   end
 

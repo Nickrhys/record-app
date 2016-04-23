@@ -1,6 +1,7 @@
 = simple_form_for @record do |f|
   = f.collection_select(:artist_id, Artist.all, :id, :name, prompt: true)
   = f.input :name, label: 'Title'
+  = f.file_field :avatar, label: "Upload cover"
   = f.simple_fields_for :tracks do |t|
     = t.input :name, label: 'Track 1' 
   = f.simple_fields_for :tracks do |t|

@@ -4,6 +4,8 @@
     = @record.name
   .li
     = @record.artist.name
+  .li
+    = image_tag(@record.avatar_url) if @record.avatar?
   .ul
   - @record.tracks.each do |track|
     .ul
