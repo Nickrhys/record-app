@@ -6,6 +6,8 @@
         = link_to record.name, record_path(record)
         = "- "
         = record.artist.name
+      .li
+        = image_tag record.avatar_url(:thumb) if record.avatar?
   - else
     %h1
       no records added
