@@ -1,0 +1,17 @@
+.container
+.ul
+  .li
+    = @record.name
+  .li
+    = @record.artist.name
+  .li
+    = image_tag(@record.avatar_url) if @record.avatar?
+
+  = simple_form_for [@record, @track], remote: true do |f|
+    = f.label :name
+    = f.text_field :name
+
+    = f.submit
+
+.ul#tracks
+  = render @tracks

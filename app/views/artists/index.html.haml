@@ -1,0 +1,9 @@
+.container
+  - if @artists.any?
+    %ul
+    - @artists.each do |artist|
+      %li
+        = link_to artist.name, records_artists_path(artist)
+  - else
+    %h1
+      no artists added

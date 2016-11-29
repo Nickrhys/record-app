@@ -1,0 +1,11 @@
+.container
+  - if @records.any?
+    %ul
+    - @records.each do |record|
+      %li
+        = link_to record.name, record_path(record)
+
+  - else
+    %h1
+      no records added
+  = link_to "add a record", new_record_path

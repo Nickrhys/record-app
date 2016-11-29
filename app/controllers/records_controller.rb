@@ -1,36 +1,33 @@
 class RecordsController < ApplicationController
 
+  before_filter :load_record, only: [:show, :edit, :update, :destroy]
+
   def index
     @records = Record.all
   end
 
   def new
     @record = Record.new
-    @record.tracks.build
   end
 
   def create
     @record = Record.create(record_params)
     @record.save!
-    redirect_to records_path
+    redirect_to new_record_track_path(@record)
   end
 
   def show
-    @record = Record.find(params[:id])
   end
 
   def edit
-    @record = Record.find(params[:id])
   end
 
   def update
-    @record = Record.find(params[:id])
     @record.update(record_params)
     redirect_to record_path(@record)
   end
 
   def destroy
-    @record = Record.find(params[:id])
     @record.destroy
     flash[:notice] = 'Record deleted successfully'
     redirect_to records_path
@@ -38,7 +35,11 @@ class RecordsController < ApplicationController
 
   protected
 
+  def load_record
+    @record = Record.find(params[:id])
+  end
+
   def record_params
-    params.require(:record).permit(:name, :artist_id, :avatar, tracks_attributes: [:name])
+    params.require(:record).permit(:name, :artist_id, :avatar)
   end
 end

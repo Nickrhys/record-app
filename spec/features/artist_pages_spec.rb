@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'artists' do 
+feature 'artists' do
 
   describe "new" do
     context "create a artist" do
